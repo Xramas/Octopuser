@@ -59,7 +59,7 @@ Octopuser 是一个可自部署的轻量空间测绘平台，用于自动发现�
 ```bash
 git clone https://github.com/Xramas/octopuser.git
 cd octopuser
-docker compose up --build -d
+docker compose up -d --build
 ````
 
 ---

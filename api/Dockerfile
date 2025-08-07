@@ -1,16 +1,15 @@
-FROM python:3.13-slim
+# 使用您指定的 Python 镜像
+FROM python:3.13.0-slim-trixie
 
+# 设置工作目录
 WORKDIR /app
 
-COPY requirements.txt .
+# 优化层缓存：先复制并安装依赖
+COPY api/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# 使用虚拟环境安装 FastAPI 服务依赖
-RUN python3 -m venv /opt/venv \
- && /opt/venv/bin/pip install --no-cache-dir --upgrade pip \
- && /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+# 复制应用代码
+COPY api/ .
 
-ENV PATH="/opt/venv/bin:$PATH"
-
-COPY . .
-
+# 设置服务启动命令
 CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]

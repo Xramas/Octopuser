@@ -1,16 +1,3 @@
-太好了，下面是为你的仓库 [`Xramas/octopuser`](https://github.com/Xramas/octopuser/tree/master) 编写的初始 `README.md`，基于你当前的项目架构、使用组件和部署方式，内容涵盖：
-
-* 项目介绍
-* 系统架构
-* 使用指南
-* API 示例
-* 扩展建议
-
----
-
-## 📄 `README.md` 内容如下：
-
-```markdown
 # 🐙 Octopuser
 
 > 基于 Masscan / Naabu / Httpx / Zgrab2 / FastAPI / MongoDB 的现代化网络空间测绘系统
@@ -142,9 +129,4 @@ octopuser/
 
 MIT License © [Xramas](https://github.com/Xramas)
 
-```
-
----
-
-是否现在将这个 `README.md` 添加进你的项目根目录并重新打包？或者直接提交到你的 GitHub？需要我配合写 `.gitignore`、`LICENSE`、`Makefile` 之类辅助文件吗？
 ```

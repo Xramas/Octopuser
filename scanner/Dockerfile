@@ -1,6 +1,6 @@
 # ---- Builder Stage ----
-# 将 Go 镜像更新为基于 Bookworm 的版本，这是一个稳定且存在的标签
-FROM golang:1.22-bookworm as builder
+# 使用当前最新的稳定版 Go (1.24) 以获取最新的功能和安全更新
+FROM golang:1.24-bookworm as builder
 
 # 设置工作目录
 WORKDIR /src
@@ -12,7 +12,7 @@ RUN go install github.com/projectdiscovery/naabu/v2/cmd/naabu@latest && \
     go install github.com/projectdiscovery/httpx/cmd/httpx@latest
 
 # ---- Final Stage ----
-# 将 Python 镜像更新为基于 Bookworm 的版本
+# 运行环境保持不变
 FROM python:3.13-slim-bookworm
 
 # 安装运行时的必要依赖 (只安装 masscan)

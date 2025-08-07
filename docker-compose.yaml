@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: octopuser-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  api:
+    build: ./api
+    container_name: octopuser-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017
+    depends_on:
+      - mongodb
+    volumes:
+      - ./api:/app
+
+  scanner:
+    build:
+      context: ./scanner
+      dockerfile: Dockerfile
+    container_name: octopuser-scanner
+    restart: unless-stopped
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017
+    depends_on:
+      - mongodb
+    volumes:
+      - ./scanner:/app
+
+volumes:
+  mongo-data:

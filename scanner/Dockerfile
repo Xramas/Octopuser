@@ -2,6 +2,9 @@
 # 使用当前最新的稳定版 Go (1.24)
 FROM golang:1.24-bookworm as builder
 
+# 在编译 Go 工具前，先安装其依赖的 C 库开发包 (libpcap-dev)
+RUN apt-get update && apt-get install -y libpcap-dev
+
 # 设置工作目录
 WORKDIR /src
 
@@ -18,6 +21,7 @@ RUN go install github.com/projectdiscovery/naabu/v2/cmd/naabu@latest && \
 FROM python:3.13-slim-bookworm
 
 # 安装运行时的必要依赖 (masscan 和 nmap)
+# 注意：最终运行环境不需要 -dev 包，libpcap 的运行时库已包含在基础镜像中
 RUN apt-get update && apt-get install -y --no-install-recommends \
     masscan \
     nmap \
